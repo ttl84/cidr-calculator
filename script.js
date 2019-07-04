@@ -65,12 +65,24 @@ let CidrBreakdownPage = {
         }
     },
     template: `
-        <div>
-            <label>cidr</label>
+        <div class="grid">
+            <label>CIDR</label>
             <input v-model="cidr_input" v-on:input="onInput"></input>
-            <div>From {{ from_addr }}</div>
-            <div>To {{ to_addr }}</div>
-            <div v-if="error">Error: {{ error }}</div>
+
+            <template class="grid" v-if="from_addr">
+                <label>From</label>
+                <span>{{ from_addr }}</span>
+            </template>
+
+            <template class="grid" v-if="to_addr">
+                <label>To</label>
+                <span>{{ to_addr }}</span>
+            </template>
+
+            <template class="grid" v-if="error">
+                <label>Error:</label>
+                <span>{{ error }}</span>
+            </template>
         </div>
     `,
     methods: {
