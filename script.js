@@ -78,33 +78,25 @@ let CidrBreakdownPage = {
         }
     },
     template: `
-        <div class="grid">
+        <div class="grid cidr-breakdown">
             <label>CIDR</label>
             <input v-model="cidr_input" v-on:input="onInput"></input>
 
-            <template class="grid" v-if="from_addr">
-                <label>From</label>
-                <span>{{ from_addr }}</span>
-            </template>
+            <label>From</label>
+            <div>{{ from_addr }}</div>
 
-            <template class="grid" v-if="to_addr">
-                <label>To</label>
-                <span>{{ to_addr }}</span>
-            </template>
+            <label>To</label>
+            <div>{{ to_addr }}</div>
 
-            <template class="grid" v-if="block_size">
-                <label>Block Size</label>
-                <span>{{ block_size }}</span>
-            </template>
+            <label>Block Size</label>
+            <div>{{ block_size }}</div>
 
-            <template class="grid" v-if="effective_cidr">
-                <label>Effective CIDR</label>
-                <span>{{ effective_cidr }}</span>
-            </template>
+            <label>Effective CIDR</label>
+            <div>{{ effective_cidr }}</div>
 
             <template class="grid" v-if="error">
                 <label>Error:</label>
-                <span>{{ error }}</span>
+                <div>{{ error }}</div>
             </template>
         </div>
     `,

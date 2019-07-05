@@ -1,5 +1,20 @@
 .grid {
     display: grid;
     grid-template-columns: 15ch 20ch;
+    grid-template-rows: repeat(autofit, 1fr);
+    grid-column-gap: 1ch;
+    grid-row-gap: 1ch;
     font-family: monospace;
+}
+
+.cidr-breakdown {
+    border: 2px solid rgb(233,171,88);
+    border-radius: 5px;
+    background-color: rgb(255, 213, 159);
+    padding: 1em;
+    color: #d9480f;
+}
+
+.cidr-breakdown > div {
+    outline: 2px solid rgb(233,171,88);
 }
