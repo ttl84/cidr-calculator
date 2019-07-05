@@ -50,8 +50,10 @@ function computeAddressRange(parts, maskBits) {
     let fromAddr = start & mask
     let toAddr = start | ~mask
     return {
-        'from_addr': intToAddr(fromAddr),
-        'to_addr': intToAddr(toAddr)
+        'from_addr'     : intToAddr(fromAddr),
+        'to_addr'       : intToAddr(toAddr),
+        'block_size'    : toAddr - fromAddr + 1,
+        'effective_cidr': intToAddr(fromAddr) + '/' + maskBits
     }
 }
 
@@ -61,6 +63,8 @@ let CidrBreakdownPage = {
             cidr_input: "",
             from_addr: "",
             to_addr: "",
+            block_size: "",
+            effective_cidr: "",
             error: ""
         }
     },
@@ -79,6 +83,16 @@ let CidrBreakdownPage = {
                 <span>{{ to_addr }}</span>
             </template>
 
+            <template class="grid" v-if="block_size">
+                <label>Block Size</label>
+                <span>{{ block_size }}</span>
+            </template>
+
+            <template class="grid" v-if="effective_cidr">
+                <label>Effective CIDR</label>
+                <span>{{ effective_cidr }}</span>
+            </template>
+
             <template class="grid" v-if="error">
                 <label>Error:</label>
                 <span>{{ error }}</span>
@@ -93,9 +107,11 @@ let CidrBreakdownPage = {
                 this.from_addr = ""
                 this.to_addr = ""
             } else {
-                let {from_addr, to_addr} = computeAddressRange(parts, maskBits)
-                this.from_addr = from_addr
-                this.to_addr = to_addr
+                let breakdown = computeAddressRange(parts, maskBits)
+                this.from_addr = breakdown.from_addr
+                this.to_addr = breakdown.to_addr
+                this.block_size = breakdown.block_size
+                this.effective_cidr = breakdown.effective_cidr
             }
         }
     }

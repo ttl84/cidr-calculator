@@ -1,5 +1,5 @@
 .grid {
     display: grid;
-    grid-template-columns: 10ch 20ch;
+    grid-template-columns: 15ch 20ch;
     font-family: monospace;
 }
