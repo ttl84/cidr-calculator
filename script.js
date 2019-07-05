@@ -94,10 +94,8 @@ let CidrBreakdownPage = {
             <label>Effective CIDR</label>
             <div>{{ effective_cidr }}</div>
 
-            <template class="grid" v-if="error">
-                <label>Error:</label>
-                <div>{{ error }}</div>
-            </template>
+            <label>Error:</label>
+            <div>{{ error }}</div>
         </div>
     `,
     methods: {
@@ -107,6 +105,8 @@ let CidrBreakdownPage = {
             if (error) {
                 this.from_addr = ""
                 this.to_addr = ""
+                this.block_size = ""
+                this.effective_cidr = ""
             } else {
                 let breakdown = computeAddressRange(parts, maskBits)
                 this.from_addr = breakdown.from_addr
