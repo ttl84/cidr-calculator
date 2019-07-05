@@ -41,12 +41,21 @@ function intToAddr(num) {
     return [num >>> 24, (num >>> 16) & 255, (num >>> 8) & 255, num & 255].join('.')
 }
 
+// Create a mask with specified number of bits set to 1, starting from the left
+function createMask(maskBits) {
+    if (maskBits == 0) {
+        return 0
+    } else {
+        return (~0) << (32 - maskBits)
+    }
+}
+
 // Compute the ip address range from 2 arguments.
 // parts: a list of 4 integers, each a part from the ip address in the cidr.
 // maskBits: number of bits in the bit mask
 function computeAddressRange(parts, maskBits) {
     let start = (parts[0] << 24) | (parts[1] << 16) | (parts[2] << 8) | parts[3]
-    let mask = -1 << (32 - maskBits)
+    let mask = createMask(maskBits)
     let fromAddr = start & mask
     let toAddr = start | ~mask
     return {
